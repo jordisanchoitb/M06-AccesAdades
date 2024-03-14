@@ -1,0 +1,6 @@
+{"Name":"MacBook","Price":1299,"Stock":10,"Picture":"macbook.jpeg","Categories":[{"Id":1,"Name":"macbook"},{"Id":2,"Name":"notebook"}]}
+{"Name":"Mac Pro","Price":2999,"Stock":2,"Picture":"macpro.png","Categories":[{"Id":3,"Name":"computer"}]}
+{"Name":"MacBook Pro","Price":2399,"Stock":3,"Picture":"mbptouch.jpeg","Categories":[{"Id":1,"Name":"macbook"},{"Id":2,"Name":"notebook"}]}
+{"Name":"iMac","Price":1799,"Stock":8,"Picture":"imac.jpeg","Categories":[{"Id":3,"Name":"computer"}]}
+{"Name":"Apple Watch Hermès","Price":1199,"Stock":2,"Picture":"iwatchhermes.jpeg","Categories":[{"Id":8,"Name":"watch"}]}
+{"Name":"Apple Watch Edition","Price":1299,"Stock":6,"Picture":"iwatchceramic.jpeg","Categories":[{"Id":8,"Name":"watch"}]}
