@@ -1,4 +1,5 @@
 ﻿using System;
+using NHibernate.Criterion;
 using Npgsql;
 
 namespace cat.itb.M6UF2Pr
@@ -36,6 +37,62 @@ namespace cat.itb.M6UF2Pr
                 }
             }
             return suppliers;
+        }
+
+        public void Insert(Supplier supplier)
+        {
+            using (var session = SessionFactoryCloud.Open())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Save(supplier);
+                    transaction.Commit();
+                    Console.WriteLine($"Supplier {supplier.Name} inserted");
+                }
+            }
+         }
+
+        public List<Supplier> SelectByCity(string nomciutat)
+        {
+            using (var session = SessionFactoryCloud.Open())
+            {
+                var query = session.CreateQuery("FROM Supplier WHERE City = :nomciutat");
+                query.SetParameter("nomciutat", nomciutat);
+                return query.List<Supplier>().ToList();
+            }
+        }
+
+        public void Update(Supplier supplier)
+        {
+            using (var session = SessionFactoryCloud.Open())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Update(supplier);
+                    transaction.Commit();
+                    Console.WriteLine($"Supplier {supplier.Name} updated");
+                }
+            }
+        }
+
+        public void Update(List<Supplier> suppliers)
+        {
+            foreach (var supplier in suppliers)
+            {
+                Update(supplier);
+            }
+        }
+
+        public Supplier SelectLowestAmount()
+        {
+            // utilitzan queryOver  y las subqueries del queryOver
+            using var session = SessionFactoryCloud.Open();
+            QueryOver<Supplier> minAmount = QueryOver.Of<Supplier>()
+                .SelectList(p => p.SelectMin(s => s.Amount));
+            Supplier supplier = session.QueryOver<Supplier>()
+                .WithSubquery.WhereProperty(p => p.Amount).Eq(minAmount)
+                .SingleOrDefault();
+            return supplier;
         }
     }
 }

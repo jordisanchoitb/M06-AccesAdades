@@ -1,5 +1,6 @@
 ﻿using Antlr.Runtime;
 using System;
+using System.Drawing.Printing;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace cat.itb.M6UF2Pr
@@ -9,7 +10,7 @@ namespace cat.itb.M6UF2Pr
         public static void Main()
         {
             // Exercicis amb ADO.NET
-            Act1();
+            //Act1();
             //Act2();
             //Act3();
             //Act4();
@@ -146,105 +147,119 @@ namespace cat.itb.M6UF2Pr
 
         public static void Act6()
         {
-            /* Exercici 6 (1 punt)
-A la botiga es volen vendre dos productes nous i per tant s’han d’insertar aquests dos productes a la taula PRODUCT
-i els seus corresponents proveïdors nous a la taula SUPPLIER. Inventat les dades dels dos nous productes i també
-dels nous proveïdors. Utiliza els mètodes Insert de les classes ProductCRUD i SupplierCRUD que has implementat
-per treballar amb NHibernate. */
-
-            /* Supplier
-             * public virtual int? Id { get; set; }
-        public virtual string? Name { get; set; }
-        public virtual string? Address { get; set; }
-        public virtual string? City { get; set; }
-        public virtual string? StCode { get; set; }
-        public virtual string? ZipCode { get; set; }
-        public virtual double? Area { get; set; }
-        public virtual string? Phone { get; set; }
-        public virtual int? ProductNo { get; set; }
-        public virtual double? Amount { get; set; }
-        public virtual double? Credit { get; set; }
-        public virtual string? Remark { get; set; }
-        public virtual Product? Product { get; set; }
-        public virtual IList<Order>? Orders { get; set; } */
-
-            /* Product
-             * public virtual int? Id { get; set; }
-        public virtual int? Code { get; set; }
-        public virtual string? Description { get; set; }
-        public virtual int? CurrentStock { get; set; }
-        public virtual int? MinStock { get; set; }
-        public virtual double? Price { get; set; }
-        public virtual int? EmpNo { get; set; }
-        public virtual Employee? Employee { get; set; }
-        public virtual Supplier? Supplier { get; set; }
-             */
-            /*
-            List<Supplier> suppliers = new List<Supplier>()
-            {
-                new Supplier()
-                {
-                    Name = "Supplier1",
-                    Address = "Address1",
-                    City = "City1",
-                    StCode = "StCode1",
-                    ZipCode = "ZipCode1",
-                    Area = 1.1,
-                    Phone = "Phone1",
-                    ProductNo = 1,
-                    Amount = 1.1,
-                    Credit = 1.1,
-                    Remark = "Remark1"
-                },
-                new Supplier()
-                {
-                    Name = "Supplier2",
-                    Address = "Address2",
-                    City = "City2",
-                    StCode = "StCode2",
-                    ZipCode = "ZipCode2",
-                    Area = 2.2,
-                    Phone = "Phone2",
-                    ProductNo = 2,
-                    Amount = 2.2,
-                    Credit = 2.2,
-                    Remark = "Remark2"
-                }
-            };
-
-            List<Product> products = new List<Product>()
-            {
-                new Product()
-                {
-                    Code = 1001,
-                    Description = "Description1",
-                    CurrentStock = 1,
-                    MinStock = 1,
-                    Price = 1.1,
-                    EmpNo = 1,
-                    Employee = null,
-                    Supplier = suppliers[0]
-                },
-                new Product()
-                {
-                    Code = 1002,
-                    Description = "Description2",
-                    CurrentStock = 2,
-                    MinStock = 2,
-                    Price = 2.2,
-                    EmpNo = 2,
-                    Employee = null,
-                    Supplier = suppliers[1]
-                }
-            };*/
-
+            SupplierCRUD supplierCRUD = new SupplierCRUD();
             ProductCRUD productCRUD = new ProductCRUD();
-            //productCRUD.Insert(products);
+
+            Product product1 = new Product();
+            product1.Code = 1003;
+            product1.Description = "Description3";
+            product1.CurrentStock = 3;
+            product1.MinStock = 3;
+            product1.Price = 3;
+
+            Product product2 = new Product();
+            product2.Code = 1004;
+            product2.Description = "Description4";
+            product2.CurrentStock = 4;
+            product2.MinStock = 4;
+            product2.Price = 4;
+
+            productCRUD.Insert(product1);
+            productCRUD.Insert(product2);
+
+
+            Supplier supplier1 = new Supplier();
+            supplier1.Name = "Supplier1";
+            supplier1.Address = "Address1";
+            supplier1.City = "Sevilla";
+            supplier1.StCode = "SV";
+            supplier1.ZipCode = "04057";
+            supplier1.Area = 2000;
+            supplier1.Phone = "654821485";
+            supplier1.Amount = 20000;
+            supplier1.Credit = 10000;
+            supplier1.Remark = "muy buen servicio";
+            supplier1.Product = product1;
+
+            Supplier supplier2 = new Supplier();
+            supplier2.Name = "Supplier2";
+            supplier2.Address = "Address2";
+            supplier2.City = "Barcelona";
+            supplier2.StCode = "BC";
+            supplier2.ZipCode = "08001";
+            supplier2.Area = 1000;
+            supplier2.Phone = "654821485";
+            supplier2.Amount = 10000;
+            supplier2.Credit = 5000;
+            supplier2.Remark = "muy buen servicio";
+            supplier2.Product = product2;
+
+            supplierCRUD.Insert(supplier1);
+            supplierCRUD.Insert(supplier2);
+            
+        }
+
+        public static void Act7()
+        {
+            SupplierCRUD supplierCRUD = new SupplierCRUD();
+            List<Supplier> suppliers = supplierCRUD.SelectByCity("BURLINGAME");
+            foreach (Supplier supplier in suppliers)
+            {
+                supplier.Credit = 10000;
+            }
+            supplierCRUD.Update(suppliers);
+
+        }
+
+        public static void Act8()
+        {
+            ProductCRUD productCRUD = new ProductCRUD();
             List<Product> products = productCRUD.SelectAll();
             foreach (Product product in products)
             {
                 Console.WriteLine(product);
             }
+        }
+
+        public static void Act9()
+        {
+            EmployeeCRUD employeeCRUD = new EmployeeCRUD();
+            Employee employee = employeeCRUD.SelectBySurname("ARROYO");
+            foreach (var product in employee.Products)
+            {
+                Console.WriteLine($"Product code: {product.Code} - Nom proveidor: {product.Supplier.Name}");
+            }
+        }
+
+        public static void Act10()
+        {
+            OrderCRUD orderCRUD = new OrderCRUD();
+            List<Order> orders = orderCRUD.SelectByCostHigherThan(10000, 100);
+            foreach (Order order in orders)
+            {
+                Console.WriteLine($"{order} - {order.Supplier.Name}, {order.Supplier.Phone}");
+            }
+        }
+
+        public static void Act11()
+        {
+            ProductCRUD productCRUD = new ProductCRUD();
+            List<object[]> objects = productCRUD.SelectByPriceLowThan(30);
+            foreach (object[] obj in objects)
+            {
+                Console.WriteLine($"Product code: {obj[0]} - Product description: {obj[1]}");
+            }
+
+        }
+
+        public static void Act12()
+        {
+            SupplierCRUD supplierCRUD = new SupplierCRUD();
+            Supplier supplier = supplierCRUD.SelectLowestAmount();
+            Console.WriteLine($"Nom: {supplier.Name}");
+            Console.WriteLine($"Quantitat: {supplier.Amount}");
+            Console.WriteLine($"Stock Producte: {supplier.Product.CurrentStock}");
+
         }
     }
 }

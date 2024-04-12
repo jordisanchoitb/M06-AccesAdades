@@ -48,7 +48,14 @@ namespace cat.itb.M6UF2Pr
                             employee.ManagerNo = reader.GetInt32(3);
                             employee.StartDate = reader.GetDateTime(4);
                             employee.Salary = reader.GetDouble(5);
-                            employee.Commission = reader.GetDouble(6);
+                            try
+                            {
+                                employee.Commission = reader.GetDouble(6);
+                            }
+                            catch (InvalidCastException)
+                            {
+                                employee.Commission = null;
+                            }
                             employee.DeptNo = reader.GetInt32(7);
                         }
                     }
@@ -75,5 +82,16 @@ namespace cat.itb.M6UF2Pr
                 }
             }
         }
+
+        public Employee SelectBySurname(string surname)
+        {
+            using (var session = SessionFactoryCloud.Open())
+            {
+                var query = session.CreateQuery("FROM Employee WHERE Surname = :surname");
+                query.SetParameter("surname", surname);
+                return query.List<Employee>().ToList().FirstOrDefault();
+            }
+        }
+
     }
 }

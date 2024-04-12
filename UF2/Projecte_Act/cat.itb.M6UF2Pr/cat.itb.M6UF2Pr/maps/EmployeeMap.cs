@@ -19,7 +19,8 @@ namespace cat.itb.M6UF2Pr
             HasMany(x => x.Products)
                 .KeyColumn("empno")
                 .Not.LazyLoad()
-                .Fetch.Join();
+                .Fetch.Join()
+                .AsSet();
 
         }
     }

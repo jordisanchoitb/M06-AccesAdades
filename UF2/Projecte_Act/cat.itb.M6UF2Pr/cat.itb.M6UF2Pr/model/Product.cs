@@ -4,7 +4,7 @@ namespace cat.itb.M6UF2Pr
 {
     public class Product
     {
-        public virtual int? Id { get; set; }
+        public virtual int Id { get; set; }
         public virtual int? Code { get; set; }
         public virtual string? Description { get; set; }
         public virtual int? CurrentStock { get; set; }

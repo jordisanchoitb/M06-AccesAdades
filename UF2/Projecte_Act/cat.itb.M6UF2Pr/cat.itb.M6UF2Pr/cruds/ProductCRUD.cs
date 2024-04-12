@@ -183,5 +183,16 @@ namespace cat.itb.M6UF2Pr
                 }
             }
         }
+
+        public List<object[]> SelectByPriceLowThan(double price)
+        {
+            using (var session = SessionFactoryCloud.Open())
+            {
+                var query = session.QueryOver<Product>().Where(p => p.Price < price)
+                    .SelectList(p => p.Select(p => p.Code)
+                    .Select(p => p.Description)).List<object[]>();
+                return query.ToList();
+            }
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace cat.itb.M6UF2Pr
         {
             Table("orderp");
             Id(x => x.Id);
-            References(x => x.Supplier).Column("supplierno");
+            References(x => x.Supplier).Column("supplierno").Not.LazyLoad();
             Map(x => x.OrderDate).Column("orderdate");
             Map(x => x.Amount).Column("amount");
             Map(x => x.DeliveryDate).Column("deliverydate");

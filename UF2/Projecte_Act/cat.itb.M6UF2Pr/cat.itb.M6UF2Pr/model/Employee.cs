@@ -4,7 +4,7 @@ namespace cat.itb.M6UF2Pr
 {
     public class Employee
     {
-        public virtual int? Id { get; set; }
+        public virtual int Id { get; set; }
         public virtual string? Surname { get; set; }
         public virtual string? Job { get; set; }
         public virtual int? ManagerNo { get; set; }

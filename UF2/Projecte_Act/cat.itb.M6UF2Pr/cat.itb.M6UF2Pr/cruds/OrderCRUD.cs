@@ -32,5 +32,16 @@ namespace cat.itb.M6UF2Pr
             }
             return orders;
         }
+
+        public List<Order> SelectByCostHigherThan(double cost, double amount)
+        {
+            using (var session = SessionFactoryCloud.Open())
+            {
+                var query = session.CreateQuery("FROM Order WHERE Cost > :cost AND Amount = :amount");
+                query.SetParameter("cost", cost);
+                query.SetParameter("amount", amount);
+                return query.List<Order>().ToList();
+            }
+        }
     }
 }

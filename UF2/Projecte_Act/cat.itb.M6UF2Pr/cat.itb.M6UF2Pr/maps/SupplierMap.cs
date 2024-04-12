@@ -16,14 +16,16 @@ namespace cat.itb.M6UF2Pr
             Map(x => x.ZipCode).Column("zipcode");
             Map(x => x.Area).Column("area");
             Map(x => x.Phone).Column("phone");
-            References(x => x.Product).Column("productno");
+            References(x => x.Product).Column("productno").Not.LazyLoad();
             Map(x => x.Amount).Column("amount");
             Map(x => x.Credit).Column("credit");
             Map(x => x.Remark).Column("remark");
             HasMany(x => x.Orders)
                 .KeyColumn("supplierno")
                 .Not.LazyLoad()
-                .Fetch.Join();
+                .Fetch.Join()
+                .AsSet();
+            ;
         }
     }
 }

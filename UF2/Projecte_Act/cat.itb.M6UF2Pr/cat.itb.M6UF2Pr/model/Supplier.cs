@@ -4,7 +4,7 @@ namespace cat.itb.M6UF2Pr
 {
     public class Supplier
     {
-		public virtual int? Id { get; set; }
+		public virtual int Id { get; set; }
         public virtual string? Name { get; set; }
         public virtual string? Address { get; set; }
         public virtual string? City { get; set; }
