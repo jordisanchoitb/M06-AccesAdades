@@ -43,5 +43,18 @@ namespace cat.itb.M6UF2Pr
                 return query.List<Order>().ToList();
             }
         }
+
+        public void Insert(Order order)
+        {
+            using (var session = SessionFactoryCloud.Open())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Save(order);
+                    transaction.Commit();
+                    Console.WriteLine("Inserit correctament la comanda");
+                }
+            }
+        }
     }
 }

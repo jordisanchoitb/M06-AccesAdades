@@ -34,6 +34,35 @@ namespace cat.itb.M6UF2Pr
             return product;
         }
 
+        public List<Product> SelectByEmpADO(int empno)
+        {
+            string sql = $"SELECT * FROM Product WHERE EmpNo = @empno";
+            List<Product> products = new List<Product>();
+            using (NpgsqlConnection connection = new CloudConnection().GetConnection())
+            {
+                using (NpgsqlCommand command = new NpgsqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("empno", empno);
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            products.Add(new Product
+                            {
+                                Id = reader.GetInt32(0),
+                                Code = reader.GetInt32(1),
+                                Description = reader.GetString(2),
+                                CurrentStock = reader.GetInt32(3),
+                                MinStock = reader.GetInt32(4),
+                                Price = reader.GetDouble(5),
+                            });
+                        }
+                    }
+                }
+            }
+            return products;
+        }
+
         public void UpdateADO(Product product)
         {
             string sql = "UPDATE Product SET Description = @description, CurrentStock = @currentstock, MinStock = @minstock, Price = @price, EmpNo = @empno WHERE Code = @code";

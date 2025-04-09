@@ -39,6 +39,16 @@ namespace cat.itb.M6UF2Pr
             return suppliers;
         }
 
+        public Supplier SelectByName(string name)
+        {
+            using (var session = SessionFactoryCloud.Open())
+            {
+                return session.CreateCriteria<Supplier>()
+                    .Add(Restrictions.Eq("Name", name))
+                    .UniqueResult<Supplier>();
+            }
+        }
+
         public void Insert(Supplier supplier)
         {
             using (var session = SessionFactoryCloud.Open())
@@ -93,6 +103,19 @@ namespace cat.itb.M6UF2Pr
                 .WithSubquery.WhereProperty(p => p.Amount).Eq(minAmount)
                 .SingleOrDefault();
             return supplier;
+        }
+
+        public List<object[]> SelectByStcode(string stcode)
+        {
+            using (var session = SessionFactoryCloud.Open())
+            {
+                var query = session.QueryOver<Supplier>().Where(p => p.StCode == stcode)
+                            .SelectList(p => p
+                            .Select(p => p.City)
+                            .Select(p => p.Area)
+                            .Select(p => p.StCode)).List<object[]>();
+                return query.ToList();
+            }
         }
     }
 }

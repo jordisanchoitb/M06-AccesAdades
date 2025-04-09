@@ -1,7 +1,4 @@
-﻿using Antlr.Runtime;
-using System;
-using System.Drawing.Printing;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System;
 
 namespace cat.itb.M6UF2Pr
 {
@@ -9,24 +6,174 @@ namespace cat.itb.M6UF2Pr
     {
         public static void Main()
         {
-            // Exercicis amb ADO.NET
-            //Act1();
-            //Act2();
-            //Act3();
-            //Act4();
-            //Act5();
+            bool exit = false;
+            /*
+             * En cas de que la conexio no funcioni per acces de peticions a la base de dades executar el següent codi dins del datagrip:
+             * SELECT pg_terminate_backend(pg_stat_activity.pid)
+                 FROM pg_stat_activity
+                 WHERE datname = 'ckxphvzj'
+                  AND pid <> pg_backend_pid();
+             * */
+            do
+            {
+                Console.Clear();
+                PrintMenu();
+                int option = int.Parse(Console.ReadLine());
+                switch (option)
+                {
+                    case 1:
+                        Console.Clear();
+                        Act1();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 2:
+                        Console.Clear();
+                        Act2();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 3:
+                        Console.Clear();
+                        Act3();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 4:
+                        Console.Clear();
+                        Act4();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 5:
+                        Console.Clear();
+                        Act5();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 6:
+                        Console.Clear();
+                        Act6();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 7:
+                        Console.Clear();
+                        Act7();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 8:
+                        Console.Clear();
+                        Act8();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 9:
+                        Console.Clear();
+                        Act9();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 10:
+                        Console.Clear();
+                        Act10();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 11:
+                        Console.Clear();
+                        Act11();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 12:
+                        Console.Clear();
+                        Act12();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 13:
+                        Console.Clear();
+                        Act1Examen_ADO_NET();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 14:
+                        Console.Clear();
+                        Act2Examen_ADO_NET();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 15:
+                        Console.Clear();
+                        Act3Examen_ADO_NET();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 16:
+                        Console.Clear();
+                        Act4Examen_NHibernate();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 17:
+                        Console.Clear();
+                        Act5Examen_NHibernate();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 18:
+                        Console.Clear();
+                        Act6Examen_NHibernate();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 19:
+                        Console.Clear();
+                        RunScriptShop();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 20:
+                        Console.Clear();
+                        DropTables();
+                        Console.WriteLine("Prem una tecla per continuar...");
+                        Console.ReadKey();
+                        break;
+                    case 0:
+                        exit = true;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option");
+                        break;
+                }
+            } while (!exit);
+        }
 
-            // Exercicis amb NHibernate
-            //Act6();
-            //Act7();
-            //Act8();
-            //Act9();
-            //Act10();
-            //Act11();
-            //Act12();
-
-            //RunScriptShop();
-            //DropTables();
+        public static void PrintMenu()
+        {
+            Console.WriteLine("1. Act1");
+            Console.WriteLine("2. Act2");
+            Console.WriteLine("3. Act3");
+            Console.WriteLine("4. Act4");
+            Console.WriteLine("5. Act5");
+            Console.WriteLine("6. Act6");
+            Console.WriteLine("7. Act7");
+            Console.WriteLine("8. Act8");
+            Console.WriteLine("9. Act9");
+            Console.WriteLine("10. Act10");
+            Console.WriteLine("11. Act11");
+            Console.WriteLine("12. Act12");
+            Console.WriteLine("13. Act1Examen_ADO.NET");
+            Console.WriteLine("14. Act2Examen_ADO.NET");
+            Console.WriteLine("15. Act3Examen_ADO.NET");
+            Console.WriteLine("16. Act4Examen_NHibernate");
+            Console.WriteLine("17. Act5Examen_NHibernate");
+            Console.WriteLine("18. Act6Examen_NHibernate");
+            Console.WriteLine("19. RunScriptShop");
+            Console.WriteLine("20. DropTables");
+            Console.WriteLine("0. Exit");
         }
 
         public static void RunScriptShop()
@@ -260,6 +407,94 @@ namespace cat.itb.M6UF2Pr
             Console.WriteLine($"Quantitat: {supplier.Amount}");
             Console.WriteLine($"Stock Producte: {supplier.Product.CurrentStock}");
 
+        }
+
+        public static void Act1Examen_ADO_NET()
+        {
+            EmployeeCRUD employeeCRUD = new EmployeeCRUD();
+            List<Employee> employees = employeeCRUD.SelectByJobADO("VENEDOR");
+            foreach (Employee employee in employees)
+            {
+                Console.WriteLine(employee);
+            }
+            foreach (Employee employee in employees)
+            {
+                employee.Salary = 220000;
+                employee.Commission = 40000;
+            }
+
+            employeeCRUD.UpdateADO(employees);
+
+        }
+
+        public static void Act2Examen_ADO_NET()
+        {
+            ProductCRUD productCRUD = new ProductCRUD();
+            List<Product> products = productCRUD.SelectByEmpADO(5);
+            foreach (Product product in products)
+            {
+                Console.WriteLine(product);
+            }
+        }
+
+        public static void Act3Examen_ADO_NET()
+        {
+            EmployeeCRUD employeeCRUD = new EmployeeCRUD();
+            ProductCRUD productCRUD = new ProductCRUD();
+            Product product = new Product
+            {
+                Code = 100890,
+                Description = "Description",
+                CurrentStock = 10,
+                MinStock = 10,
+                Price = 10,
+                Employee = employeeCRUD.SelectById(2),
+            };
+
+            productCRUD.Insert(product);
+            
+        }
+
+        public static void Act4Examen_NHibernate()
+        {
+            OrderCRUD orderCRUD = new OrderCRUD();
+            SupplierCRUD supplierCRUD = new SupplierCRUD();
+            Order order = new Order
+            {
+                
+                OrderDate = new DateTime(2024, 4, 16),
+                DeliveryDate = new DateTime(2024, 4, 18),
+                Cost = 1000,
+                Amount = 1000,
+                Supplier = supplierCRUD.SelectByName("JOCKSPORTS")
+            };
+            
+            orderCRUD.Insert(order);
+        }
+
+        public static void Act5Examen_NHibernate()
+        {
+            EmployeeCRUD employeeCRUD = new EmployeeCRUD();
+            List<Employee> employees = employeeCRUD.SelectAll();
+            
+            foreach (Employee employee in employees)
+            {
+                Console.WriteLine(employee);
+                foreach (Product product in employee.Products)
+                {
+                    Console.WriteLine($"{product.Id} - {product.Description}");
+                }
+            }
+        }
+
+        public static void Act6Examen_NHibernate()
+        {
+            SupplierCRUD supplierCRUD = new SupplierCRUD();
+            List<object[]> suppliers = supplierCRUD.SelectByStcode("CA");
+            foreach (object[] supplier in suppliers)
+            {
+                Console.WriteLine($"Ciutat: {supplier[0]} - Area: {supplier[1]} - Stcode: {supplier[2]}");
+            }
         }
     }
 }
